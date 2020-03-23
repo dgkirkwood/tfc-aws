@@ -21,7 +21,7 @@ resource "aws_launch_configuration" "webserver" {
 
 resource "aws_autoscaling_group" "webgroup" {
   launch_configuration = aws_launch_configuration.webserver.name
-  vpc_zone_identifier = [data.aws_subnet_ids.subnetcheck.id]
+  vpc_zone_identifier = [data.aws_subnet_ids.subnetcheck.ids]
 
   target_group_arns  = [aws_lb_target_group.asg.arn]
   health_check_type = "ELB"
