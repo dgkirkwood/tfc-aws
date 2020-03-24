@@ -10,7 +10,7 @@ resource "aws_launch_configuration" "webserver" {
 
   user_data = <<-EOF
                 #!/bin/bash
-                echo "SUP SUP SUP MWORLD" > index.html
+                echo "Hey world" > index.html
                 nohup busybox httpd -f -p ${var.server_port} &
                 EOF
 
@@ -114,6 +114,24 @@ resource "aws_security_group" "alb" {
       to_port = 0
       protocol = "-1"
       cidr_blocks = ["0.0.0.0/0"]
+  }
+}
+
+resource "aws_s3_bucket" "app_static_storage" {
+  bucket = "dkirkwood-webapp-static"
+  lifecycle {
+      prevent_destroy = true
+  }
+  versioning {
+      enabled = true
+  }
+
+  server_side_encryption_configuration {
+      rule {
+          apply_server_side_encryption_by_default {
+              sse_algorithm = "AES256"
+          }
+      }
   }
 }
 
