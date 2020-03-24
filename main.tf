@@ -119,9 +119,6 @@ resource "aws_security_group" "alb" {
 
 resource "aws_s3_bucket" "app_static_storage" {
   bucket = "dkirkwood-webapp-static"
-  lifecycle {
-      prevent_destroy = true
-  }
   versioning {
       enabled = true
   }
