@@ -7,10 +7,11 @@ resource "aws_launch_configuration" "webserver" {
   image_id = "ami-02a599eb01e3b3c5b"
   instance_type = "t2.micro"
   security_groups = [aws_security_group.instance.id]
+  name_prefix = "worker-"
 
   user_data = <<-EOF
                 #!/bin/bash
-                echo "Hello 2 tha world" > index.html
+                echo "Hello World" > index.html
                 nohup busybox httpd -f -p ${var.server_port} &
                 EOF
 
@@ -23,10 +24,16 @@ resource "aws_autoscaling_group" "webgroup" {
   launch_configuration = aws_launch_configuration.webserver.name
   vpc_zone_identifier = data.aws_subnet_ids.subnetcheck.ids
 
+  name = aws_launch_configuration.webserver.name
+
   target_group_arns  = [aws_lb_target_group.asg.arn]
   health_check_type = "ELB"
   min_size = 2
   max_size = 2
+
+  lifecycle {
+      create_before_destroy = true
+  }
 
   tag {
       key = "Name"
