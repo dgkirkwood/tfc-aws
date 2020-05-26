@@ -79,7 +79,7 @@ resource "aws_lb_listener_rule" "asg" {
   priority = 100
 
   condition {
-      field = "path_pattern"
+      field = "path-pattern"
       values = ["*"]
   }
   action {
