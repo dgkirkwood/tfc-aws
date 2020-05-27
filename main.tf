@@ -98,7 +98,7 @@ resource "aws_lb_listener_rule" "asg" {
 
 
 resource "aws_security_group" "instance" {
-  name= "my-first-server-group"
+  name= "web-server-group"
   ingress {
       from_port = var.server_port
       to_port = var.server_port
