@@ -28,8 +28,8 @@ resource "aws_autoscaling_group" "webgroup" {
 
   target_group_arns  = [aws_lb_target_group.asg.arn]
   health_check_type = "ELB"
-  min_size = 3
-  max_size = 3
+  min_size = 2
+  max_size = 2
 
   lifecycle {
       create_before_destroy = true
