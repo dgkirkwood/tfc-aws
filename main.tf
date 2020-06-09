@@ -125,7 +125,7 @@ resource "aws_security_group" "alb" {
 }
 
 resource "aws_s3_bucket" "app_static_storage" {
-  bucket = "dkirkwood-webapp-static"
+  bucket = "dkirkwood-hashi-webapp-static"
   versioning {
       enabled = true
   }
