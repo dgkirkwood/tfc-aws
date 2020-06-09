@@ -43,7 +43,7 @@ resource "aws_autoscaling_group" "webgroup" {
 }
 
 resource "aws_lb" "mylb" {
-  name = "dk-terraform-asg"
+  name = "dk-terraform-asg2"
   load_balancer_type = "application"
   subnets = data.aws_subnet_ids.subnetcheck.ids
   security_groups = [aws_security_group.alb.id]
