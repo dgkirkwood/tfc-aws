@@ -7,7 +7,7 @@ resource "aws_launch_configuration" "webserver" {
   image_id = "ami-02a599eb01e3b3c5b"
   instance_type = "t2.micro"
   security_groups = [aws_security_group.instance.id]
-  name_prefix = "worker-"
+  name_prefix = "dk-worker-"
 
   user_data = <<-EOF
                 #!/bin/bash
@@ -37,13 +37,13 @@ resource "aws_autoscaling_group" "webgroup" {
 
   tag {
       key = "Name"
-      value = "terraform-asg-example"
+      value = "dk-terraform-asg"
       propagate_at_launch  = true
   }
 }
 
 resource "aws_lb" "mylb" {
-  name = "terraform-asg-example"
+  name = "dk-terraform-asg"
   load_balancer_type = "application"
   subnets = data.aws_subnet_ids.subnetcheck.ids
   security_groups = [aws_security_group.alb.id]
@@ -98,7 +98,7 @@ resource "aws_lb_listener_rule" "asg" {
 
 
 resource "aws_security_group" "instance" {
-  name= "web-server-group"
+  name= "dk-web-server-group"
   ingress {
       from_port = var.server_port
       to_port = var.server_port
@@ -108,7 +108,7 @@ resource "aws_security_group" "instance" {
 }
 
 resource "aws_security_group" "alb" {
-  name = "terraform-example-alb"
+  name = "dk-terraform-alb"
 
   ingress {
       from_port = 80
