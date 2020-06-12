@@ -108,7 +108,7 @@ resource "aws_security_group" "instance" {
 }
 
 resource "aws_security_group" "alb" {
-  name = "dk-terraform-alb"
+  name = "dk-terraform-alb2"
 
   ingress {
       from_port = 80
